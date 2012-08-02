@@ -1,0 +1,28 @@
+.TH PHASH 3 "August 2012"
+.SH NAME
+phash_dct \- Perceptual hashing for images
+.SH SYNOPSIS
+.nf
+.B #include <phash.h>
+.sp
+.BI "uint64_t phash_dct(char " "*filename" );
+.fi
+.SH DESCRIPTION
+The function
+.BR phash_dct ()
+calculates a 64-bit perceptual hash characterising the image file at
+.IR filename .
+Images that are similar to each other (for some human-relevant value of similar) will have identical or similar perceptual hashes.
+.SH RETURN VALUE
+.BR phash_dct ()
+returns a 64-bit hash. If
+.I filename
+is not a valid image (i.e. ImageMagick can't open it), the value 0 will be returned, and
+.I errno
+will be set to
+.BR EINVALID .
+Note that 0 may also be a valid hash (for images that are completely black).
+.SH "SEE ALSO"
+.BR hamming_uint64_t (3)
+.SH LICENSE
+Licensed as free software under the MIT license.

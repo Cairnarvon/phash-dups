@@ -1,0 +1,6 @@
+phash-index
+phashd
+phash-dups
+phash.o
+phash.so
+man/*.gz

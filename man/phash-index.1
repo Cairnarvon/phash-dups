@@ -1,0 +1,30 @@
+.TH PHASH-INDEX 1 "August 2012" "" "PHASH-DUPS"
+.SH NAME
+phash-index \- adds entries to the phash-dups database
+.SH SYNOPSIS
+.B phash-index
+.RB [\| \-d
+.IR db_dir \|]
+.RB [\| \-h \|]
+.IR image
+.SH DESCRIPTION
+.B phash-index
+adds an image file to the
+.B phash-dups
+database.
+.SH OPTIONS
+.TP
+.BI \-d\ db_dir
+Specifies the database directory. If this option is not given, it defaults to
+the value of the PHASHDB environment variable if that is set; otherwise,
+$HOME/.phashdb.
+.TP
+.BI \-h
+Display an overview of options and exit without doing anything.
+.TP
+.BI image
+The image to index. If this is a non-image file, it is ignored.
+.SH "SEE ALSO"
+.BR phash-init (1),
+.BR phash-dups (1),
+.BR phashd (1),

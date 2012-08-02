@@ -1,0 +1,24 @@
+.TH PHASH-CLEAN 1 "August 2012" "" "PHASH-DUPS"
+.SH NAME
+phash-clean \- clean-up utility for phash-dups
+.SH SYNOPSIS
+.B phash-clean
+.RB [\| \-d
+.IR db_dir \|]
+.RB [\| \-h \|]
+.SH DESCRIPTION
+.B phash-clean
+deletes a
+.B phash-dubs
+database when you no longer need it.
+.SH OPTIONS
+.TP
+.BI \-d\ db_dir
+Specifies the database directory. If this option is not given, it defaults to
+the value of the PHASHDB environment variable if that is set; otherwise,
+$HOME/.phashdb.
+.TP
+.BI \-h
+Display an overview of options and exit without doing anything.
+.SH "SEE ALSO"
+.BR phash-init (1)

@@ -1,0 +1,25 @@
+.TH PHASH 3 "August 2012"
+.SH NAME
+hamming_uint64_t, ep_uint64_t \- Comparison functions for perceptual hashes
+.SH SYNOPSIS
+.nf
+.B #include <phash.h>
+.sp
+.BI "unsigned hamming_uint64_t(uint64_t " "h1" ", uint64_t " "h2" );
+.br
+.BI "unsigned ep_uint64_t(uint64_t " "h1" ", uint64_t " "h2" );
+.fi
+.SH DESCRIPTION
+.BR hamming_uint64_t ()
+calculates the Hamming distance between two 64-bit hashes.
+.PP
+.BR ep_uint64_t ()
+calculates the Equality Percentage of two 64-bit hashes.
+.SH RETURN VALUE
+.BR hamming_uint64_t ()
+returns a value in the range 0 (perfect equality) to 64 (perfect inequality).
+.PP
+.BR ep_uint64_t ()
+returns a value in the range 0 (perfect inequality) to 100 (perfect equality).
+.SH LICENSE
+Licensed as free software under the MIT license.

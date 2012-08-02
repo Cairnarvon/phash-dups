@@ -1,0 +1,42 @@
+.TH PHASHD 1 "August 2012" "" "PHASH-DUPS"
+.SH NAME
+phashd \- the phash-dups daemon
+.SH SYNOPSIS
+.B phashd
+.RB [\| \-d
+.IR db_dir \|]
+.RB [\| \-f \|]
+.RB [\| \-h \|]
+.RB [\| \-r \|]
+.RB [\|
+.IR dir
+.RB \|]
+.SH DESCRIPTION
+.B phashd
+monitors directories for new files and automatically invokes
+.B phash-index
+when it detects one.
+.SH OPTIONS
+.TP
+.BI \-d\ db_dir
+Specifies the database directory. If this option is not given, it defaults to
+the value of the PHASHDB environment variable if that is set; otherwise,
+$HOME/.phashdb.
+.TP
+.BI \-f
+Run in the foreground; that is, don't daemonise.
+.TP
+.BI \-h
+Display an overview of options and exit without doing anything.
+.TP
+.BI \-r
+Recursively index and watch all subdirectories of the specified directory
+rather than just the top level.
+.TP
+.BI dir
+The directory to index and watch. If this is not specified, it defaults to the
+current working directory.
+.SH "SEE ALSO"
+.BR phash-init (1),
+.BR phash-dups (1),
+.BR phash-index (1),

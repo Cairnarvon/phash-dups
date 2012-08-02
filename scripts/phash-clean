@@ -1,0 +1,26 @@
+#!/bin/bash
+
+[ -z "$PHASHDB" ] && PHASHDB="$HOME/.phashdb"
+
+while getopts '+hd:' opt; do
+    case $opt in
+        h)
+            echo "Usage: $0 [-d DB_DIR] [-h]"
+            echo
+            echo "  -d DB_DIR"
+            echo "    Specify directory to use for the database." \
+                 "(default: \$PHASHDB or \$HOME/.phashdb)"
+            echo
+            echo "  -h"
+            echo "    Display this message and exit."
+            echo
+            exit
+            ;;
+        d)
+            PHASHDB="$OPTARG"
+            ;;
+    esac
+done
+
+pkill phashd
+rm -r "$PHASHDB" && echo "Done."

@@ -1,0 +1,35 @@
+.TH PHASH-DUPS 1 "August 2012" "" "PHASH-DUPS"
+.SH NAME
+phash-dups \- quickly find duplicate images
+.SH SYNOPSIS
+.B phash-dups
+.RB [\| \-c
+.IR opener \|]
+.RB [\| \-d
+.IR db_dir \|]
+.RB [\| \-h \|]
+.IR image
+.SH DESCRIPTION
+.B phash-dups
+calculates a perceptual hash of the image you provide, and if this hash already
+exists in its database, opens a folder containing all of the matching images.
+.SH OPTIONS
+.TP
+.BI \-c\ opener
+The program with which to open the image folder. If not specified, it defaults
+to
+.B xdg-open .
+.TP
+.BI \-d\ db_dir
+Specifies the database directory. If this option is not given, it defaults to
+the value of the PHASHDB environment variable if that is set; otherwise,
+$HOME/.phashdb.
+.TP
+.BI \-h
+Display an overview of options and exit without doing anything.
+.TP
+.BI image
+The image of which you'd like to find duplicates.
+.SH "SEE ALSO"
+.BR phash-init (1),
+.BR phash-index (1)

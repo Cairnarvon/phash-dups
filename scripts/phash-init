@@ -1,0 +1,54 @@
+#!/bin/bash
+
+DIR=`pwd`
+[ -z "$PHASHDB" ] && PHASHDB="$HOME/.phashdb"
+RECURSE=
+FOREGROUND=
+
+while getopts '+hd:fr' opt; do
+    case $opt in
+        h)
+            echo "Usage: $0 [-d DB_DIR] [-f] [-h] [-r] [WATCH_DIR]"
+            echo
+            echo "  -d DB_DIR"
+            echo "    Specify directory to use for the database." \
+                 "(default: \$PHASHDB or \$HOME/.phashdb)"
+            echo
+            echo "  -f"
+            echo "    Run phashd in the foreground."
+            echo
+            echo "  -h"
+            echo "    Display this message and exit."
+            echo
+            echo "  -r"
+            echo "    Index and watch all subdirectories too."
+            echo
+            echo "  WATCH_DIR"
+            echo "    The directory to watch. (default: .)"
+            echo
+            exit
+            ;;
+        d)
+            PHASHDB="$OPTARG"
+            ;;
+        r)
+            RECURSE="-r"
+            ;;
+        f)
+            FOREGROUND="-f"
+            ;;
+    esac
+done
+
+shift $(($OPTIND - 1))
+[ -n "$1" ] && DIR="$1"
+
+if [ -n "$RECURSE" ]; then
+    find "$DIR" -exec phash-index -d "$PHASHDB" {} \;
+else
+    for f in $DIR/*; do
+        phash-index -d "$PHASHDB" "$f"
+    done
+fi
+
+eval exec phashd -d "$PHASHDB" "$RECURSE" "$FOREGROUND" "$DIR"
