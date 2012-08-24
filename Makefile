@@ -17,7 +17,7 @@ phash.so: src/phash.c
 .PHONY: install-lib
 install-lib: phash.so
 	install phash.so /usr/lib/phash.so
-	install phash.h /usr/include/phash.h
+	install src/phash.h /usr/include/phash.h
 	@gzip man/phash_dct.3 man/hamming_uint64_t.3
 	install man/*.3 man/*.3.gz /usr/share/man/man3/
 	@gunzip man/*.gz

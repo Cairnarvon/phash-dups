@@ -22,7 +22,7 @@ If not, you'll have to build the shared object first:
 
 > `make phash.so`
 
-And then move `phash.so`, `phash.h`, and the man pages (`man/*.3`) to the right places yourself.
+And then move `phash.so`, `src/phash.h`, and the man pages (`man/*.3`) to the right places yourself.
 
 You will need the [ImageMagick MagickWand](http://www.imagemagick.org/script/install-source.php#unix) library. On Debian, this is the package `libmagickwand-dev`.
 
