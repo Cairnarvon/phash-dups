@@ -12,7 +12,7 @@ The library exports three functions:
 
 * `uint64_t phash_dct(char*)`, the usual 64-bit DCT-based perceptual hash,
 * `unsigned hamming_uint64_t(uint64_t, uint64_t)`, which calculates the Hamming distance between two hashes, and
-* `unsigned ep_uint64_t(uint64_t, uint64_t)`, which calculates the Equality Percetange, and is just a macro using `hamming_uint64_t`.
+* `unsigned ep_uint64_t(uint64_t, uint64_t)`, which calculates the Equality Percentage, and is just a macro using `hamming_uint64_t`.
 
 If you're using a system that puts things in predictable places (like Debian), you can install it as follows (as root):
 
