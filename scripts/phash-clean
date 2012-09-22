@@ -22,5 +22,13 @@ while getopts '+hd:' opt; do
     esac
 done
 
-pkill phashd
+if [ -f "$PHASHDB/.pid" ]; then
+    DPID=$(cat "$PHASHDB/.pid")
+    if kill -0 "$DPID" 2>/dev/null && \
+       [ "$(cat /proc/$DPID/comm)" == "phashd" ]; then
+        echo "Stopping phashd."
+        kill "$DPID"
+    fi
+fi
+
 rm -r "$PHASHDB" && echo "Done."

@@ -102,6 +102,19 @@ int mkdb(char *db_dir) {
     return 0;
 }
 
+void save_pid(char *db_dir)
+{
+    FILE *f;
+    int len = strlen(db_dir) + 6, pid = getpid();
+    char *pidfile = malloc(len);
+
+    snprintf(pidfile, len, "%s/.pid", db_dir);
+    f = fopen(pidfile, "w");
+    fprintf(f, "%d", pid);
+    fclose(f);
+    free(pidfile);
+}
+
 void usage(char *argv0)
 {
     printf("Usage: %s [-d DB_DIR] [-f] [-h] [-r] [WATCH_DIR]\n\n"
@@ -161,6 +174,9 @@ int main(int argc, char **argv)
     }
     if (mkdb(db_dir) != 0)
         return 1;
+
+    /* Save PID for neater clean-up later. */
+    save_pid(db_dir);
 
     /* Daemonise if we should daemonise. */
     if (!foreground)

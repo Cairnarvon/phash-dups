@@ -77,6 +77,6 @@ Once you have this database, you can easily find matches for images using `phash
 
 If matches are found, a folder containing all of them will be opened using `xdg-open` (see the `xdg-mime` man page for configuration details). Deleting files in this folder will remove them from the database.
 
-If for some reason you no longer want your database, you can delete it using `phash-clean`. This will also kill every running instance of `phashd` you have the rights to kill.
+If for some reason you no longer want your database, you can delete it using `phash-clean`. This will also try to kill the right `phashd` if it's running.
 
 Read the man pages, or use the `-h` flag, for more information.
