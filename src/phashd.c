@@ -78,6 +78,30 @@ void r_add_watch(int fd, char *dir, uint32_t mask)
     }
 }
 
+int mkdb(char *db_dir) {
+    if (mkdir(db_dir, 0755) != 0) {
+        extern int errno;
+
+        if (errno == EEXIST) {
+            struct stat s;
+
+            stat(db_dir, &s);
+
+            if (!S_ISDIR(s.st_mode)) {
+                fprintf(stderr,
+                        "%s exists and is not a directory.\n",
+                        db_dir);
+                return 1;
+            }
+
+        } else {
+            perror("Invalid DB dir");
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void usage(char *argv0)
 {
     printf("Usage: %s [-d DB_DIR] [-f] [-h] [-r] [WATCH_DIR]\n\n"
@@ -111,28 +135,7 @@ int main(int argc, char **argv)
             foreground = 1;
             break;
         case 'd':
-            db_dir = strdup(optarg);
-
-            if (mkdir(optarg, 0755) != 0) {
-                extern int errno;
-
-                if (errno == EEXIST) {
-                    struct stat s;
-
-                    stat(optarg, &s);
-
-                    if (!S_ISDIR(s.st_mode)) {
-                        fprintf(stderr,
-                                "%s exists and is not a directory.\n",
-                                optarg);
-                        return 1;
-                    }
-
-                } else {
-                    perror("Invalid DB dir");
-                    return 1;
-                }
-            }
+            db_dir = optarg;
             break;
         case 'h':
             usage(argv[0]);
@@ -156,6 +159,8 @@ int main(int argc, char **argv)
         db_dir = malloc(strlen(home) + 10);
         snprintf(db_dir, strlen(home) + 10, "%s/.phashdb", home);
     }
+    if (mkdb(db_dir) != 0)
+        return 1;
 
     /* Daemonise if we should daemonise. */
     if (!foreground)
