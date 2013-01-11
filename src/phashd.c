@@ -124,6 +124,7 @@ void usage(char *argv0)
            "  -f\n    Run in the foreground.\n\n"
            "  -h\n    Display this message and exit.\n\n"
            "  -r\n    Watch all subdirectories too.\n\n"
+           "  -s\n    Use symlinks instead of hard links.\n\n"
            "  WATCH_DIR\n    The directory to watch. (default: .)\n\n",
            argv0);
 }
@@ -132,14 +133,14 @@ void usage(char *argv0)
 int main(int argc, char **argv)
 {
     int fd, recurse = 0, foreground = 0, c;
-    char *db_dir = NULL;
+    char *db_dir = NULL, *sym = "";
     uint32_t mask = IN_ONLYDIR | IN_CREATE | IN_MOVED_TO;
 
     /* Option parsing */
     extern int optind;
     extern char *optarg;
 
-    while ((c = getopt(argc, argv, "+rfd:h")) != -1) {
+    while ((c = getopt(argc, argv, "+rfd:sh")) != -1) {
         switch (c) {
         case 'r':
             recurse = 1;
@@ -149,6 +150,9 @@ int main(int argc, char **argv)
             break;
         case 'd':
             db_dir = optarg;
+            break;
+        case 's':
+            sym = "-s";
             break;
         case 'h':
             usage(argv[0]);
@@ -236,7 +240,7 @@ int main(int argc, char **argv)
                 int l = strlen(path) + strlen(db_dir) + 20;
                 char *cmd = malloc(l);
 
-                snprintf(cmd, l, "phash-index -d %s %s", db_dir, path);
+                snprintf(cmd, l, "phash-index %s -d %s %s", sym, db_dir, path);
 
                 if (system(cmd) != 0)
                     fprintf(stderr, "Couldn't index %s.\n", path);

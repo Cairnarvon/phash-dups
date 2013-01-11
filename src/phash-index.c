@@ -17,6 +17,7 @@ void usage(char *argv0)
            "  -d DB_DIR\n"
            "    Specify directory to use for the database."
            " (default: $PHASHDB or $HOME/.phashdb)\n\n"
+           "  -s\n    Index using symlinks instead of hard links.\n\n"
            "  -h\n    Display this message and exit.\n\n"
            "  IMAGE\n"
            "    Image to hash and add to the database.\n\n",
@@ -27,16 +28,20 @@ int main(int argc, char **argv)
 {
     char *db_dir = NULL;
     extern int errno;
+    int (*mklink)(const char*, const char*) = link;
 
     /* Parse options. */
     int c;
     extern int optind;
     extern char *optarg;
 
-    while ((c = getopt(argc, argv, "+d:h")) != -1) {
+    while ((c = getopt(argc, argv, "+d:sh")) != -1) {
         switch (c) {
         case 'd':
             db_dir = strdup(optarg);
+            break;
+        case 's':
+            mklink = symlink;
             break;
         case 'h':
             usage(argv[0]);
@@ -102,8 +107,8 @@ int main(int argc, char **argv)
         fn[sz - el - 2] = '_';
     }
 
-    /* Create hard link. */
-    if (link(argv[optind], fn) != 0) {
+    /* Create link. */
+    if (mklink(argv[optind], fn) != 0) {
         perror("Can't link");
         return 1;
     }

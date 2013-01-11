@@ -8,6 +8,7 @@ phashd \- the phash-dups daemon
 .RB [\| \-f \|]
 .RB [\| \-h \|]
 .RB [\| \-r \|]
+.RB [\| \-s \|]
 .RB [\|
 .IR dir
 .RB \|]
@@ -32,6 +33,11 @@ Display an overview of options and exit without doing anything.
 .BI \-r
 Recursively index and watch all subdirectories of the specified directory
 rather than just the top level.
+.TP
+.BI \-s
+Use symlinks instead of hard links. This option is passed on to
+.B phash-index
+when it is called.
 .TP
 .BI dir
 The directory to index and watch. If this is not specified, it defaults to the

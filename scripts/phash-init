@@ -4,11 +4,12 @@ DIR=`pwd`
 [ -z "$PHASHDB" ] && PHASHDB="$HOME/.phashdb"
 RECURSE=
 FOREGROUND=
+SYMLINK=
 
 while getopts '+hd:fr' opt; do
     case $opt in
         h)
-            echo "Usage: $0 [-d DB_DIR] [-f] [-h] [-r] [WATCH_DIR]"
+            echo "Usage: $0 [-d DB_DIR] [-f] [-h] [-r] [-s] [WATCH_DIR]"
             echo
             echo "  -d DB_DIR"
             echo "    Specify directory to use for the database." \
@@ -23,6 +24,9 @@ while getopts '+hd:fr' opt; do
             echo "  -r"
             echo "    Index and watch all subdirectories too."
             echo
+            echo "  -s"
+            echo "    Index using symlinks instead of hard links."
+            echo
             echo "  WATCH_DIR"
             echo "    The directory to watch. (default: .)"
             echo
@@ -33,6 +37,9 @@ while getopts '+hd:fr' opt; do
             ;;
         r)
             RECURSE="-r"
+            ;;
+        s)
+            SYMLINK="-s"
             ;;
         f)
             FOREGROUND="-f"

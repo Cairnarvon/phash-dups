@@ -5,6 +5,7 @@ phash-index \- adds entries to the phash-dups database
 .B phash-index
 .RB [\| \-d
 .IR db_dir \|]
+.RB [\| \-s \|]
 .RB [\| \-h \|]
 .IR image
 .SH DESCRIPTION
@@ -18,6 +19,9 @@ database.
 Specifies the database directory. If this option is not given, it defaults to
 the value of the PHASHDB environment variable if that is set; otherwise,
 $HOME/.phashdb.
+.TP
+.BI \-s
+Use symlinks instead of hard links.
 .TP
 .BI \-h
 Display an overview of options and exit without doing anything.

@@ -41,7 +41,7 @@ Additionally, there are two Bash helper scripts:
 * `phash-init`, which indexes all files in a folder and then starts the daemon, and
 * `phash-clean`, which deletes the database and kills the daemon.
 
-The database is actually just a folder with subfolders for each hash and hard links to images mapping to that hash in each hash folder. Hard links are used both to keep space usage down and to avoid having to track file deletions, but come with the caveat that the monitored folder tree can't span multiple filesystems and that the database has to be on the same filesystem as the monitored folders.
+The database is actually just a folder with subfolders for each hash and links to images mapping to that hash in each hash folder. Hard links are used by default both to keep space usage down and to avoid having to track file deletions, but come with the caveat that the monitored folder tree can't span multiple filesystems and that the database has to be on the same filesystem as the monitored folders. You can use symlinks instead with the `-s` flag, as long as you don't mind that they'll break if you delete images.
 
 The daemon uses `inotify` to watch directories, making it Linux-only.
 
