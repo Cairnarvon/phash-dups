@@ -51,4 +51,4 @@ endif
 
 .PHONY: clean
 clean:
-	rm -f phash.so phash.o phash-index phashd phash-dubs
+	rm -f phash.so phash.o phash-index phashd phash-dups
